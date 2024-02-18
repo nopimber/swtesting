@@ -1,0 +1,23 @@
+.bg-background-main {
+    /* background-color: #172b4d !important; */
+    background-image: url('../assets/img/bg_n.jpg');
+
+
+    /* รูปภาพจะประกบเต็มจอ */
+    background-size: cover;
+
+    /* ให้รูปภาพอยู่ตรงกลาง */
+    background-position: center center;
+
+    /* ป้องกันไม่ให้รูปภาพซ้ำซ้อน */
+    background-repeat: no-repeat;
+
+    /* ให้เนื้อหาครอบคลุมจอภาพทั้งหมด (ถ้าหากเนื้อหาของคุณไม่มาก) */
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.table-custom-color{
+    background-color: #D7FFE3 !important;
+}
