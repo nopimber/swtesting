@@ -369,6 +369,9 @@
 <script src="../assets/js/argon.js?v=1.0.0"></script>
 <script>
   document.getElementById("run-queue").addEventListener("click",function (e){
+    if(document.getElementsByTagName("tbody")[0].childElementCount === 0){
+      return alert("ไม่มีออร์เดอร์สำหรับการรันคิวกรุณาเพิ่มออร์เดอร์ประเภท \"Order\" ก่อน")
+    }
     document.getElementById("run-queue-form").submit();
   })
 </script>

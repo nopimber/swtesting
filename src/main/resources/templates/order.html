@@ -296,7 +296,8 @@
               </div>
               <div class="form-group" >
                 <label class="form-control-label" for="input-flowerAmount">จำนวนดอกไม้ (ดอก)</label>
-                <input id="input-flowerAmount" class="form-control form-control-alternative" th:field="*{orderQuantity}" placeholder="ระบุจำนวนดอกไม้" type="number" required min = "90">
+<!--                <input id="input-flowerAmount" class="form-control form-control-alternative" th:field="*{orderQuantity}" placeholder="ระบุจำนวนดอกไม้" type="number" required min="90">-->
+                <input id="input-flowerAmount" class="form-control form-control-alternative" placeholder="ระบุจำนวนดอกไม้" type="number" name="amount" th:field="*{orderQuantity}" required min="90">
               </div>
               <div class="form-group">
                 <label class="form-control-label" for="input-orderType">ประเภทการสั่ง</label>
@@ -328,8 +329,8 @@
               <div class="form-group">
                 <label class="form-control-label" for="input-orderNumber">เลือกหมายเลข Order</label>
                 <select id="input-orderNumber" class="form-control form-control-alternative" th:field="*{orderNumber}">
-                  <option value="0">กรุณาเลือกหมายเลข Order</option>
-                  <option th:each=" q : ${queue_ordering}" th:value="${q.getOderNumber()}" th:text="${q.getOderNumber()}">D00001</option>
+                  <option value="0" >กรุณาเลือกหมายเลข Order</option>
+                  <option th:each=" q : ${queue_ordering}" th:value="${q.getOderNumber()}" th:status="${q.getStatus()}" th:text="${q.getOderNumber()}">D00001</option>
                 </select>
                 <!-- <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="ห"> -->
               </div>
@@ -362,11 +363,19 @@
 <script src="../assets/js/argon.js?v=1.0.0"></script>
 <script>
   document.getElementById('create-order').addEventListener('click', function(e) {
+    const flowerNumber = document.getElementById('input-flowerAmount').value
+    if(flowerNumber <= 0 || flowerNumber % 90 !== 0 || flowerNumber > 900 ){
+      return alert("กรุณากรอกจำนวนดอกไม้ให้ถูกต้อง")
+    }
     document.getElementById("createOrderForm").submit();
   });
   document.getElementById('cancel-order').addEventListener('click', function(e) {
+    const selectedStatus = document.getElementById('input-orderNumber').selectedOptions[0].attributes["status"].value
+    if (selectedStatus !== "PENDING") {
+      return alert("ยกเลิกออร์เดอร์ไม่สำเร็จ กรุณาเลือกหมายเลขออร์เดอร์ที่มีสถานะ PENDING เท่านั้น")
+    }
     document.getElementById("cancel-form").submit();
-  });
+  })
 
 </script>
 </body>
